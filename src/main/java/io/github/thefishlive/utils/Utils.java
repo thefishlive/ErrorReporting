@@ -1,8 +1,17 @@
 package io.github.thefishlive.utils;
 
+import sun.tools.jar.resources.jar;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class Utils {
 
@@ -15,4 +24,24 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+    public static String formatDate(Date date) {
+        return new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss").format(date);
+    }
+
+    public static byte[] readFully(InputStream stream) throws IOException {
+        byte[] data = new byte[4096];
+        ByteArrayOutputStream entryBuffer = new ByteArrayOutputStream();
+        int len;
+
+        do {
+            len = stream.read(data);
+            if (len > 0) {
+                entryBuffer.write(data, 0, len);
+            }
+        } while (len != -1);
+
+        return entryBuffer.toByteArray();
+    }
+
 }

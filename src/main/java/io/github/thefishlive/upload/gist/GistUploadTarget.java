@@ -18,8 +18,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class GistUploadTarget implements UploadTarget {
 
@@ -34,7 +32,7 @@ public class GistUploadTarget implements UploadTarget {
     public String upload(CrashReport report) {
         GistData data = new GistData();
         data.setDescription(report.getDescription());
-        data.addFile(formatDate(report.getCrashDate()) + ".md", new GistFile(report.build(getFormat())));
+        data.addFile(Utils.formatDate(report.getCrashDate()) + ".md", new GistFile(report.build(getFormat())));
         
         try {
             logger.debug(GIST_UPLOAD_TARGET.toExternalForm());
@@ -66,10 +64,6 @@ public class GistUploadTarget implements UploadTarget {
         }
 
         return null;
-    }
-
-    private String formatDate(Date date) {
-        return new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss").format(date);
     }
 
     @Override
