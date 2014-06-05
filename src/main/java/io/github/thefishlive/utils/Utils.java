@@ -1,7 +1,5 @@
 package io.github.thefishlive.utils;
 
-import sun.tools.jar.resources.jar;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +8,6 @@ import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 public class Utils {
 

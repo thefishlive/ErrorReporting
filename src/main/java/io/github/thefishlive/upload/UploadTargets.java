@@ -2,11 +2,9 @@ package io.github.thefishlive.upload;
 
 import io.github.thefishlive.upload.gist.GistUploadTarget;
 import io.github.thefishlive.upload.pastebin.PastebinUploadTarget;
-import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.Constructor;
 
-@RequiredArgsConstructor
 public enum UploadTargets {
 
     GIST(GistUploadTarget.class),
@@ -14,6 +12,11 @@ public enum UploadTargets {
 
     private final Class<? extends UploadTarget> clazz;
     private Constructor<? extends UploadTarget> ctor;
+
+    @java.beans.ConstructorProperties({"clazz"})
+    private UploadTargets(Class<? extends UploadTarget> clazz) {
+        this.clazz = clazz;
+    }
 
     private Constructor<? extends UploadTarget> getCtor() throws NoSuchMethodException {
         if (ctor == null) {
